@@ -1,0 +1,39 @@
+<?php declare(strict_types=1);
+/**
+ * @var MessageLogEntry[] $messages
+ * @var LanguagePriorityInterface $languages
+ */
+
+use Eventjet\I18n\Language\LanguagePriorityInterface;
+use MessageBus\Log\MessageLogEntry;
+
+?>
+<h1><?= $this->translate('message_bus_log', $languages) ?></h1>
+<table>
+    <thead>
+    <tr>
+        <th><?= $this->translate('message_bus_log_class', $languages) ?></th>
+        <th><?= $this->translate('message_bus_log_timestamp', $languages) ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($messages as $entry): ?>
+        <?php
+        $formattedDate = $this->dateFormat(
+            $entry->getStart(),
+            IntlDateFormatter::MEDIUM,
+            IntlDateFormatter::MEDIUM,
+            (string)$languages->primary()->getBaseLanguage()
+        );
+        ?>
+        <tr>
+            <td>
+                <a href="<?= $this->url('admin/message-bus-log/entry', ['message_id' => $entry->getId()]) ?>">
+                    <?= $entry->getClass() ?>
+                </a>
+            </td>
+            <td><?= $formattedDate ?></td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>

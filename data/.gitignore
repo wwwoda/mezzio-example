@@ -1,0 +1,5 @@
+*
+!cache/config/.gitkeep
+!cache/di/.gitkeep
+!doctrine/mapping/orm/.gitkeep
+!.gitignore

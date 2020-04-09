@@ -1,0 +1,14 @@
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity name="Woda\User\User" table="users">
+        <id name="id" type="string">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="email" type="email_object_type"/>
+        <field name="passwordHash" column="password_hash" type="password_hash_object_type"/>
+        <field name="roles" type="json"/>
+        <field name="details" type="json"/>
+    </entity>
+</doctrine-mapping>

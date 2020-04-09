@@ -1,0 +1,36 @@
+<?php declare(strict_types=1);
+/**
+ * @var MessageLogEntry $message
+ * @var LanguagePriorityInterface $languages
+ * @var PageHeader $pageHeader
+ */
+$locale = (string)$languages->primary()->getBaseLanguage();
+$jsonOptions = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
+use Eventjet\I18n\Language\LanguagePriorityInterface;
+use Eventjet\View\PageHeader;
+use MessageBus\Log\MessageLogEntry;
+
+?>
+<?= $this->pageHeader($pageHeader) ?>
+<dl>
+    <dt>Class</dt>
+    <dd><?= $message->getClass() ?></dd>
+    <dt>Start</dt>
+    <dd><?= $this->dateFormat($message->getStart(), IntlDateFormatter::LONG, IntlDateFormatter::MEDIUM, $locale) ?></dd>
+    <dt>End</dt>
+    <dd><?= $this->dateFormat($message->getEnd(), IntlDateFormatter::LONG, IntlDateFormatter::MEDIUM, $locale) ?></dd>
+</dl>
+<h2>Data</h2>
+<dl>
+    <?php foreach ($message->getData() as $key => $value): ?>
+        <dt><?= $key ?></dt>
+        <dd>
+            <?php if (is_array($value)): ?>
+                <pre><?= json_encode($value, $jsonOptions) ?></pre>
+            <?php else : ?>
+                <?= $value ?>
+            <?php endif ?>
+        </dd>
+    <?php endforeach ?>
+</dl>

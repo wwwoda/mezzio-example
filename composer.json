@@ -1,0 +1,121 @@
+{
+    "name": "woda/business-platform",
+    "description": "Woda Business Platform is designed to be the starting point for professional php projects.",
+    "type": "project",
+    "license": "proprietary",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-fileinfo": "*",
+        "doctrine/cache": "^1.10",
+        "doctrine/migrations": "^2.2",
+        "doctrine/orm": "^2.7",
+        "hybridauth/hybridauth": "^3.2",
+        "kriswallsmith/assetic": "^1.4",
+        "laminas/laminas-authentication": "^2.7",
+        "laminas/laminas-component-installer": "^2.1.1",
+        "laminas/laminas-config": "^3.3",
+        "laminas/laminas-config-aggregator": "^1.0",
+        "laminas/laminas-crypt": "^3.3",
+        "laminas/laminas-di": "^3.1",
+        "laminas/laminas-diactoros": "^1.7.1 || ^2.0",
+        "laminas/laminas-filter": "^2.9",
+        "laminas/laminas-form": "^2.14",
+        "laminas/laminas-hydrator": "^3.0",
+        "laminas/laminas-i18n": "^2.10",
+        "laminas/laminas-inputfilter": "^2.10",
+        "laminas/laminas-servicemanager": "^3.3",
+        "laminas/laminas-stdlib": "^3.1",
+        "laminas/laminas-validator": "^2.13",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "mezzio/mezzio": "^3.0.1",
+        "mezzio/mezzio-authentication": "^1.1",
+        "mezzio/mezzio-authentication-basic": "^1.0",
+        "mezzio/mezzio-authentication-session": "^1.0",
+        "mezzio/mezzio-authorization": "^1.0",
+        "mezzio/mezzio-authorization-acl": "^1.0",
+        "mezzio/mezzio-csrf": "^1.0",
+        "mezzio/mezzio-flash": "^1.0",
+        "mezzio/mezzio-helpers": "^5.0",
+        "mezzio/mezzio-laminasrouter": "^3.0",
+        "mezzio/mezzio-laminasviewrenderer": "^2.0",
+        "mezzio/mezzio-session": "^1.3",
+        "mezzio/mezzio-session-ext": "^1.8",
+        "ramsey/uuid": "^3.9",
+        "roave/psr-container-doctrine": "^2.1",
+        "simple-bus/message-bus": "^3.1",
+        "symfony/console": "^4.4",
+        "thecodingmachine/safe": "^1.0"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.1.12",
+        "laminas/laminas-development-mode": "^3.1",
+        "mezzio/mezzio-tooling": "^1.0",
+        "phpstan/phpstan": "^0.12.18",
+        "phpunit/phpunit": "^7.0.1",
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^2.9.1",
+        "trinet/mezzio-test": "^0.1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "AotGeneratedDi\\": "data/cache/di-cache",
+            "App\\": "src/App/src/",
+            "Woda\\Cms\\": "src/Woda/Cms/src/",
+            "Woda\\Core\\": "src/Woda/Core/src/",
+            "Woda\\Form\\": "src/Woda/Form/src/",
+            "Woda\\MessageBus\\": "src/Woda/MessageBus/src/",
+            "Woda\\MessageQueue\\": "src/Woda/MessageQueue/src/",
+            "Woda\\MezzioModule\\Admin\\": "src/Woda/MezzioModule/Admin/src/",
+            "Woda\\MezzioModule\\AssetManager\\": "src/Woda/MezzioModule/AssetManager/src/",
+            "Woda\\MezzioModule\\Authentication\\": "src/Woda/MezzioModule/Authentication/src/",
+            "Woda\\MezzioModule\\Backend\\": "src/Woda/MezzioModule/Backend/src/",
+            "Woda\\MezzioModule\\Config\\": "src/Woda/MezzioModule/Config/src/",
+            "Woda\\MezzioModule\\Core\\": "src/Woda/MezzioModule/Core/src/",
+            "Woda\\MezzioModule\\Doctrine\\": "src/Woda/MezzioModule/Doctrine/src/",
+            "Woda\\MezzioModule\\Error\\": "src/Woda/MezzioModule/Error/src/",
+            "Woda\\MezzioModule\\I18n\\": "src/Woda/MezzioModule/I18n/src/",
+            "Woda\\MezzioModule\\LaminasForm\\": "src/Woda/MezzioModule/LaminasForm/src/",
+            "Woda\\MezzioModule\\MessageBus\\": "src/Woda/MezzioModule/MessageBus/src/",
+            "Woda\\MezzioModule\\User\\": "src/Woda/MezzioModule/User/src/",
+            "Woda\\User\\": "src/Woda/User/src/",
+            "Woda\\WordPress\\": "src/Woda/WordPress/src/"
+        },
+        "files": [
+            "src/Woda/MezzioModule/Core/functions/middlewareFunctions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AppTest\\": "test/AppTest/",
+            "WodaTest\\MessageBus\\": "src/Woda/MessageBus/test/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "clear-config-cache": "php bin/clear-config-cache.php",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "development-disable": "laminas-development-mode disable",
+        "development-enable": "laminas-development-mode enable",
+        "development-status": "laminas-development-mode status",
+        "mezzio": "mezzio --ansi",
+        "post-create-project-cmd": [
+            "@development-enable"
+        ],
+        "serve": "php -S 0.0.0.0:8080 -t public/",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://pack.woda.at/"
+        }
+    ]
+}

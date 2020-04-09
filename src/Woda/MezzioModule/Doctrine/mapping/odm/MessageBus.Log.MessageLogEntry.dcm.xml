@@ -1,0 +1,12 @@
+<doctrine-mongo-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
+                        xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
+                        http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
+    <document name="MessageBus\Log\MessageLogEntry" collection="message_bus_log">
+        <field name="id" id="true" type="uuid" strategy="NONE"/>
+        <field name="class" type="string"/>
+        <field name="start" type="date"/>
+        <field name="end" type="date"/>
+        <field name="data" type="hash"/>
+    </document>
+</doctrine-mongo-mapping>

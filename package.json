@@ -1,0 +1,15 @@
+{
+  "name": "mezzio-skeleton",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn compile-css & yarn compile-js",
+    "compile-css": "yarn node-sass src/ -o src/ --include-path node_modules/ --source-map true",
+    "compile-js": "yarn webpack --config webpack.dev.ts"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "node-sass": "^4.13.1"
+  }
+}
