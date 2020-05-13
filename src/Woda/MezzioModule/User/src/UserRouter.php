@@ -8,7 +8,7 @@ use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
-use Woda\MezzioModule\Core\Router\RouteProviderInterface;
+use Woda\MezzioModule\Core\Router\RouteProvider;
 use Woda\MezzioModule\User\App\Login\LoginHandler;
 use Woda\MezzioModule\User\App\Logout\LogoutHandler;
 use Woda\MezzioModule\User\App\PasswordReset\PasswordResetHandler;
@@ -17,14 +17,13 @@ use Woda\MezzioModule\User\App\Register\RegisterHandler;
 use function Woda\MezzioModule\Core\formMiddleware;
 use function Woda\MezzioModule\Core\userMiddleware;
 
-final class UserRouter implements RouteProviderInterface
+final class UserRouter implements RouteProvider
 {
     private const LOGIN = 'login';
     private const REGISTER = 'register';
     private const LOGOUT = 'logout';
     private const PASSWORD_RESET = 'password-reset';
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {

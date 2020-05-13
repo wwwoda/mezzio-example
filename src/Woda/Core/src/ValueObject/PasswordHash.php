@@ -18,11 +18,6 @@ final class PasswordHash
         return new self($hash);
     }
 
-    public function equals(string $other): bool
-    {
-        return $this->hash === $other;
-    }
-
     public function toString(): string
     {
         return $this->hash;

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Woda\MezzioModule\AssetManager;
 
-use Woda\MezzioModule\AssetManager\Middleware\ResolveAssetMiddleware;
-use Woda\MezzioModule\AssetManager\Middleware\ResolveAssetMiddlewareFactory;
+use Woda\MezzioModule\AssetManager\Asset\AssetFactory;
+use Woda\MezzioModule\AssetManager\Asset\AsseticAssetFactory;
+use Woda\MezzioModule\AssetManager\Resolver\PathMappingResolver;
+use Woda\MezzioModule\AssetManager\Resolver\PathMappingResolverFactory;
+use Woda\MezzioModule\AssetManager\Resolver\Resolver;
 use Woda\MezzioModule\Config\MezzioModuleConfig;
 
 final class ConfigProvider
@@ -16,8 +19,12 @@ final class ConfigProvider
             ->withConfig(
                 [
                     'dependencies' => [
+                        'aliases' => [
+                            AssetFactory::class => AsseticAssetFactory::class,
+                            Resolver::class => PathMappingResolver::class,
+                        ],
                         'factories' => [
-                            ResolveAssetMiddleware::class => ResolveAssetMiddlewareFactory::class,
+                            PathMappingResolver::class => PathMappingResolverFactory::class,
                         ],
                     ],
                 ]

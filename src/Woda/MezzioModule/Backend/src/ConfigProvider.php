@@ -14,6 +14,7 @@ final class ConfigProvider
             ->withTemplatePath(__DIR__ . '/../templates/')
             ->withAssetPath(__DIR__ . '/../assets/')
             ->withRouteProvider(BackendRouter::class)
+            ->withPipeProvider(BackendRouter::class)
             ->toArray();
     }
 }

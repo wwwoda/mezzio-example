@@ -11,8 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class LogoutHandler implements RequestHandlerInterface
 {
-    /** @var AuthenticationInterface */
-    private $auth;
+    private AuthenticationInterface $auth;
 
     public function __construct(AuthenticationInterface $auth)
     {

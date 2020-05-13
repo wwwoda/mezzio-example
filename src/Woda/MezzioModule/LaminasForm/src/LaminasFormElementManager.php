@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Woda\MezzioModule\LaminasForm;
 
-use Woda\Form\FormElementManager;
+use Laminas\Form\FormInterface;
+use RuntimeException;
 
-class LaminasFormElementManager implements FormElementManager
+class LaminasFormElementManager implements FormElementManagerInterface
 {
-    /** @var PolyfillFormElementManager */
-    private $formManager;
+    private PolyfillFormElementManager $formManager;
 
     public function __construct(PolyfillFormElementManager $formManager)
     {
@@ -19,8 +19,12 @@ class LaminasFormElementManager implements FormElementManager
     /**
      * @inheritDoc
      */
-    public function get(string $name, ?array $options = null): object
+    public function get(string $name, ?array $options = null): FormInterface
     {
-        return $this->formManager->get($name, $options);
+        $form = $this->formManager->get($name, $options);
+        if (!$form instanceof FormInterface) {
+            throw new RuntimeException(\Safe\sprintf('Form with name "%s" not found in FormElementManager', $name));
+        }
+        return $form;
     }
 }

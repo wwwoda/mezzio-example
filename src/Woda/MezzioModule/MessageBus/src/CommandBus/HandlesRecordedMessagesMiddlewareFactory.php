@@ -7,7 +7,7 @@ namespace Woda\MezzioModule\MessageBus\CommandBus;
 use Interop\Container\ContainerInterface;
 use SimpleBus\Message\Recorder\HandlesRecordedMessagesMiddleware;
 use SimpleBus\Message\Recorder\PublicMessageRecorder;
-use Woda\MessageBus\EventBus\EventBus;
+use Woda\MessageBus\EventBus\EventBusInterface;
 use Woda\MezzioModule\MessageBus\MessageBusMiddlewareFactory;
 
 class HandlesRecordedMessagesMiddlewareFactory
@@ -16,7 +16,7 @@ class HandlesRecordedMessagesMiddlewareFactory
     {
         return new HandlesRecordedMessagesMiddleware(
             $container->get(PublicMessageRecorder::class),
-            MessageBusMiddlewareFactory::fromContainer($container, EventBus::KEY)
+            MessageBusMiddlewareFactory::fromContainer($container, EventBusInterface::KEY)
         );
     }
 }

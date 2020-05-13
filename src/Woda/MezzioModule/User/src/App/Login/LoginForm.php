@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Woda\MezzioModule\User\App\Login;
 
 use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Email;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Password;
-use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Mezzio\Csrf\CsrfGuardInterface;
@@ -29,7 +29,7 @@ class LoginForm extends Form implements InputFilterProviderInterface
     {
         $this->add(
             [
-                'type' => Text::class,
+                'type' => Email::class,
                 'name' => 'email',
                 'options' => [
                     'label' => 'Email',

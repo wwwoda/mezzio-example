@@ -35,45 +35,53 @@ final class MezzioModuleConfig
 
     public function withTemplatePath(string $templatePath): self
     {
-        return $this->addedConfigProvider(
-            new ArrayProvider(['templates' => ['paths' => [$this->name => $templatePath . $this->name]]])
-        );
-    }
-
-    private function addedConfigProvider(callable $provider): self
-    {
-        $clone = clone $this;
-        $clone->configProvider[] = $provider;
-        return $clone;
+        return $this->addArrayConfig(['templates' => ['paths' => [$this->name => $templatePath . $this->name]]]);
     }
 
     public function withAssetPath(string $assetPath): self
     {
-        return $this->addedConfigProvider(new ArrayProvider(['asset_manager' => ['paths' => [$assetPath]]]));
+        return $this->addArrayConfig(['asset_manager' => ['paths' => [$assetPath]]]);
     }
 
     public function withConfigFolder(string $configFolderPath): self
     {
-        return $this->addedConfigProvider(new PhpFileProvider($configFolderPath . '/{{,*.}config}.php'));
+        return $this->addConfigProvider(new PhpFileProvider($configFolderPath . '/{{,*.}config}.php'));
     }
 
     public function withRouteProvider(string $class)
     {
-        return $this->addedConfigProvider(new ArrayProvider(['woda' => ['route_provider' => [$class]]]));
+        return $this->addArrayConfig(['woda' => ['router' => ['route_provider' => [$class]]]]);
+    }
+
+    public function withPipeProvider(string $class)
+    {
+        return $this->addArrayConfig(['woda' => ['router' => ['pipe_provider' => [$class]]]]);
     }
 
     public function withConfig(array $config): self
     {
-        return $this->addedConfigProvider(new ArrayProvider($config));
+        return $this->addArrayConfig($config);
     }
 
     public function withCommandBusMapping(string $class): self
     {
-        return $this->addedConfigProvider(new ArrayProvider(['command_bus' => ['mapping_provider' => [$class]]]));
+        return $this->addArrayConfig(['command_bus' => ['mapping_provider' => [$class]]]);
     }
 
     public function withEventBusMapping(string $class): self
     {
-        return $this->addedConfigProvider(new ArrayProvider(['event_bus' => ['mapping_provider' => [$class]]]));
+        return $this->addArrayConfig(['event_bus' => ['mapping_provider' => [$class]]]);
+    }
+
+    private function addArrayConfig(array $array): self
+    {
+        return $this->addConfigProvider(new ArrayProvider($array));
+    }
+
+    private function addConfigProvider(callable $provider): self
+    {
+        $clone = clone $this;
+        $clone->configProvider[] = $provider;
+        return $clone;
     }
 }

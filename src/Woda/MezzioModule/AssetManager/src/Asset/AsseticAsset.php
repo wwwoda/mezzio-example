@@ -2,146 +2,50 @@
 
 declare(strict_types=1);
 
-namespace Woda\MezzioModule\Core\Resolver;
+namespace Woda\MezzioModule\AssetManager\Asset;
 
 use Assetic\Asset\AssetInterface;
-use Assetic\Filter\FilterInterface;
 
-final class AsseticAsset implements AssetInterface
+final class AsseticAsset implements Asset
 {
-    /** @var Asset */
-    private $asset;
+    private AssetInterface $asset;
 
-    public function __construct(Asset $asset)
+    public function __construct(AssetInterface $asset)
     {
         $this->asset = $asset;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function ensureFilter(FilterInterface $filter)
+    public function getPath(): string
     {
-        // TODO: Implement ensureFilter() method.
+        return $this->asset->getSourceDirectory() . '/' . $this->asset->getSourcePath();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getFilters()
+    public function getMimeType(): string
     {
-        // TODO: Implement getFilters() method.
+        $mimeType = \Safe\mime_content_type($this->getPath());
+        if ($mimeType !== 'text/plain') {
+            return $mimeType;
+        }
+        ['extension' => $extension] = pathinfo($this->getPath());
+        if ($extension === 'css') {
+            return 'text/css';
+        }
+        if ($extension === 'js') {
+            return 'text/javascript';
+        }
+        return $mimeType;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function clearFilters()
+    public function getContent(): string
     {
-        // TODO: Implement clearFilters() method.
+        return $this->asset->dump();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function load(FilterInterface $additionalFilter = null)
+    public function getContentLength(): int
     {
-        // TODO: Implement load() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function dump(FilterInterface $additionalFilter = null)
-    {
-        // TODO: Implement dump() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getContent()
-    {
-        // TODO: Implement getContent() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setContent($content)
-    {
-        // TODO: Implement setContent() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSourceRoot()
-    {
-        // TODO: Implement getSourceRoot() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSourcePath()
-    {
-        // TODO: Implement getSourcePath() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSourceDirectory()
-    {
-        // TODO: Implement getSourceDirectory() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getTargetPath()
-    {
-        // TODO: Implement getTargetPath() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setTargetPath($targetPath)
-    {
-        // TODO: Implement setTargetPath() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getLastModified()
-    {
-        // TODO: Implement getLastModified() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getVars()
-    {
-        // TODO: Implement getVars() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setValues(array $values)
-    {
-        // TODO: Implement setValues() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getValues()
-    {
-        // TODO: Implement getValues() method.
+        if (!function_exists('mb_strlen')) {
+            return strlen($this->getContent());
+        }
+        return mb_strlen($this->getContent(), '8bit');
     }
 }

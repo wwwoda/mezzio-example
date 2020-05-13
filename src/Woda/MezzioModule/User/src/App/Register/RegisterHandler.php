@@ -10,12 +10,12 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Woda\Core\Crypt\Password\Password;
-use Woda\Form\FormElementManager;
+use Woda\Core\Crypt\Password\PasswordInterface;
 use Woda\MessageBus\CommandBus\CommandBus;
 use Woda\MezzioModule\Core\Http\ResponseFactory;
 use Woda\MezzioModule\Core\Middleware\CsrfMiddleware;
 use Woda\MezzioModule\Core\View\Renderer\SinglePageTemplateRenderer;
+use Woda\MezzioModule\LaminasForm\FormElementManagerInterface;
 use Woda\User\Command\RegisterUser;
 
 final class RegisterHandler implements RequestHandlerInterface
@@ -28,9 +28,9 @@ final class RegisterHandler implements RequestHandlerInterface
     private $commandBus;
     /** @var AppRouter */
     private $router;
-    /** @var FormElementManager */
+    /** @var FormElementManagerInterface */
     private $formManager;
-    /** @var Password */
+    /** @var PasswordInterface */
     private $password;
 
     public function __construct(
@@ -38,8 +38,8 @@ final class RegisterHandler implements RequestHandlerInterface
         ResponseFactory $response,
         CommandBus $commandBus,
         AppRouter $router,
-        FormElementManager $formManager,
-        Password $password
+        FormElementManagerInterface $formManager,
+        PasswordInterface $password
     ) {
         $this->template = $template;
         $this->response = $response;
@@ -69,7 +69,7 @@ final class RegisterHandler implements RequestHandlerInterface
             var_dump($form->getMessages());
             return $this->get($request, $form);
         }
-        $this->commandBus->handle(new RegisterUser($form->getEmail(), $form->getPassword()));
+        $this->commandBus->handle(RegisterUser::withPasswordHash($form->getEmail(), $form->getPassword()));
         return $this->response->redirect($this->router->homeUri());
     }
 

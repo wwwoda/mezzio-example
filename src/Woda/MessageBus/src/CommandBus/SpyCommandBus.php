@@ -8,9 +8,9 @@ final class SpyCommandBus implements CommandBus
 {
     private SpyBus $spyBus;
 
-    public function __construct(SpyBus $spyBus)
+    public function __construct()
     {
-        $this->spyBus = $spyBus;
+        $this->spyBus = new SpyBus();
     }
 
     public function handle(object $message): void

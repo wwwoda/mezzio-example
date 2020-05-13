@@ -15,6 +15,7 @@ use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
 use Woda\MezzioModule\AssetManager\Middleware\ResolveAssetMiddleware;
+use Woda\MezzioModule\Core\Router\PipeProviderRegistry;
 use Woda\MezzioModule\I18n\Middleware\LanguagePriorityMiddleware;
 
 /**
@@ -43,6 +44,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/api', $apiMiddleware);
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
+    $container->get(PipeProviderRegistry::class)->addPipe($app, $factory, $container);
 
     // Register the routing middleware in the middleware pipeline.
     // This middleware registers the Mezzio\Router\RouteResult request attribute.

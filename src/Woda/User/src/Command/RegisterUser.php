@@ -10,12 +10,18 @@ use Woda\Core\ValueObject\PasswordHash;
 final class RegisterUser
 {
     private string $email;
-    private string $hash;
+    private ?string $hash;
 
-    public function __construct(Email $email, PasswordHash $hash)
+    public static function withPasswordHash(Email $email, PasswordHash $hash): self
+    {
+        $instance = new self($email);
+        $instance->hash = $hash->toString();
+        return $instance;
+    }
+
+    private function __construct(Email $email)
     {
         $this->email = $email->toString();
-        $this->hash = $hash->toString();
     }
 
     public function email(): Email

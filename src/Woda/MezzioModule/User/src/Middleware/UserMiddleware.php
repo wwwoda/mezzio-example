@@ -17,7 +17,7 @@ use function current;
 class UserMiddleware implements MiddlewareInterface
 {
     private $user;
-    private $redirect;
+    private string $redirect;
 
     public function __construct(callable $user, string $redirect)
     {

@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Woda\MezzioModule\Authentication\Middleware\AuthenticationMiddleware;
+use Woda\MezzioModule\Authentication\Middleware\MezzioAuthenticationMiddleware;
 use Woda\MezzioModule\Core\Http\ResponseFactory;
 
 class AuthorizationMiddleware implements MiddlewareInterface
@@ -30,7 +30,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $user = AuthenticationMiddleware::user($request);
+        $user = MezzioAuthenticationMiddleware::user($request);
         if ($user === null) {
             return $this->responseFactory->unauthorized();
         }

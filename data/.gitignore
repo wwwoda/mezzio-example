@@ -1,5 +1,6 @@
-*
+cache/config/
 !cache/config/.gitkeep
+cache/di/
 !cache/di/.gitkeep
-!doctrine/mapping/orm/.gitkeep
-!.gitignore
+database.sqlite
+htpasswd

@@ -8,12 +8,12 @@ use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
 
-final class RouteProviderRegistry implements RouteProviderInterface
+final class RouteProviderRegistry implements RouteProvider
 {
-    /** @var RouteProviderInterface[] */
-    private $registeredProvider;
+    /** @var RouteProvider[] */
+    private array $registeredProvider;
 
-    public function __construct(RouteProviderInterface ...$registeredProvider)
+    public function __construct(RouteProvider ...$registeredProvider)
     {
         $this->registeredProvider = $registeredProvider;
     }

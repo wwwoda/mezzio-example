@@ -11,8 +11,9 @@ final class ConfigProvider
     public function __invoke()
     {
         return MezzioModuleConfig::forModule('admin')
-            ->withTemplatePath(__DIR__ . '/../templates')
+            ->withTemplatePath(__DIR__ . '/../template/')
             ->withRouteProvider(AdminRouter::class)
+            ->withPipeProvider(AdminRouter::class)
             ->toArray();
     }
 }

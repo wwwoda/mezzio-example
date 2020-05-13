@@ -9,8 +9,7 @@ use Woda\User\User;
 
 final class MezzioUser implements UserInterface
 {
-    /** @var User */
-    private $user;
+    private User $user;
 
     public function __construct(User $user)
     {
@@ -35,7 +34,7 @@ final class MezzioUser implements UserInterface
      */
     public function getRoles(): iterable
     {
-        return $this->user->getRoles();
+        return ['user'];
     }
 
     /**
@@ -43,7 +42,7 @@ final class MezzioUser implements UserInterface
      */
     public function getDetail(string $name, $default = null)
     {
-        return $this->user->getDetails()[$name] ?? $default;
+        return $default;
     }
 
     /**
@@ -51,6 +50,6 @@ final class MezzioUser implements UserInterface
      */
     public function getDetails(): array
     {
-        return $this->user->getDetails();
+        return [];
     }
 }

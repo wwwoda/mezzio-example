@@ -6,7 +6,7 @@ namespace Woda\MezzioModule\MessageBus\Middleware\Queue;
 
 use Psr\Container\ContainerInterface;
 use Woda\MessageBus\CommandBus\CommandBus;
-use Woda\MessageBus\EventBus\EventBus;
+use Woda\MessageBus\EventBus\EventBusInterface;
 use Woda\MezzioModule\Config\AppConfig;
 use Woda\MezzioModule\MessageBus\CommandBus\CommandBusMapping;
 use Woda\MezzioModule\MessageBus\EventBus\EventBusMapping;
@@ -19,7 +19,7 @@ final class MessageRouterFactory
     {
         return new MessageRouter(
             $this->mapping($container),
-            $container->get(EventBus::class),
+            $container->get(EventBusInterface::class),
             $container->get(CommandBus::class)
         );
     }

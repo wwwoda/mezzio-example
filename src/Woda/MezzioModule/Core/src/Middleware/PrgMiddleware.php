@@ -14,7 +14,7 @@ class PrgMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $session = SessionMiddleware::extractSession($request);
+        $session = MezzioSessionMiddleware::extractSession($request);
 
         if ($request->getMethod() === 'POST') {
             $session->set('post_data', $request->getParsedBody());

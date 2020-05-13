@@ -6,12 +6,15 @@ namespace Woda\MezzioModule\Core;
 
 use Mezzio\Authorization\Acl\LaminasAcl;
 use Mezzio\Authorization\AuthorizationInterface;
-use Woda\Core\Crypt\Password\Password;
+use Woda\Core\Crypt\Password\PasswordInterface;
 use Woda\Core\DateTime\ClockInterface;
 use Woda\Core\DateTime\SystemClock;
 use Woda\MezzioModule\Config\MezzioModuleConfig;
-use Woda\MezzioModule\Core\Crypt\Password\LaminasBcryptPassword;
-use Woda\MezzioModule\Core\Router\RouteProviderInterface;
+use Woda\MezzioModule\Core\Crypt\Password\LaminasBcryptPasswordInterface;
+use Woda\MezzioModule\Core\Router\PipeProvider;
+use Woda\MezzioModule\Core\Router\PipeProviderRegistry;
+use Woda\MezzioModule\Core\Router\PipeProviderRegistryFactory;
+use Woda\MezzioModule\Core\Router\RouteProvider;
 use Woda\MezzioModule\Core\Router\RouteProviderRegistry;
 use Woda\MezzioModule\Core\Router\RouteProviderRegistryFactory;
 use Woda\MezzioModule\Core\View\Helper\Flash;
@@ -26,15 +29,21 @@ final class ConfigProvider
             ->withTemplatePath(__DIR__ . '/../templates/')
             ->withConfig(
                 [
+                    'woda' => [
+                        'route_provider' => [],
+                        'pipe_provider' => [],
+                    ],
                     'dependencies' => [
                         'aliases' => [
                             AuthorizationInterface::class => LaminasAcl::class,
                             ClockInterface::class => SystemClock::class,
                             LanguagePriorityFactoryInterface::class => FallbackLanguagePriorityFactory::class,
-                            Password::class => LaminasBcryptPassword::class,
-                            RouteProviderInterface::class => RouteProviderRegistry::class,
+                            PasswordInterface::class => LaminasBcryptPasswordInterface::class,
+                            PipeProvider::class => PipeProviderRegistry::class,
+                            RouteProvider::class => RouteProviderRegistry::class,
                         ],
                         'factories' => [
+                            PipeProviderRegistry::class => PipeProviderRegistryFactory::class,
                             RouteProviderRegistry::class => RouteProviderRegistryFactory::class,
                         ],
                     ],

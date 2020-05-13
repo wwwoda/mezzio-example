@@ -10,13 +10,10 @@ use Woda\MezzioModule\User\App\Register\RegisterForm;
 
 ?>
 <section class="form-register">
-    <div class="text-center mb-4">
-        <img class="mb-4" src="logo.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
-    </div>
+    <?= $this->partial('user::partial/header', ['title' => 'Registration']) ?>
     <?= $this->form($form) ?>
-    <div class="mt-5 mb-3 text-muted text-center">
-        <ul style="list-style-type: none;margin: 0;padding: 0;">
+    <div>
+        <ul>
             <li><a href="<?= $this->url('login') ?>">Login</a></li>
             <li><a href="<?= $this->url('password-reset') ?>">Lost Password?</a></li>
             <li><a href="<?= $this->url('home') ?>">Home</a></li>

@@ -56,12 +56,6 @@ final class ConfigProvider
                                 'paths' => __DIR__ . '/../mapping/orm',
                             ],
                         ],
-                        'migrations' => [
-                            'directory' => __DIR__ . '/../data/migrations/orm',
-                            'name' => 'DB Migrations',
-                            'table' => 'migration',
-                            'column' => 'version_timestamp',
-                        ],
                     ],
 
                     /*'doctrine' => [

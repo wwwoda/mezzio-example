@@ -9,13 +9,12 @@ use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
-use Woda\MezzioModule\Core\Router\RouteProviderInterface;
+use Woda\MezzioModule\Core\Router\RouteProvider;
 
-final class AppRouter implements RouteProviderInterface
+final class AppRouter implements RouteProvider
 {
     private const HOME = 'home';
-    /** @var RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {

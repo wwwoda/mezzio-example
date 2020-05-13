@@ -1,23 +1,16 @@
 <?php
 /**
- * @var DummyRenderer $this
- * @var LoginForm $form
+ * @var \App\View\Renderer\DummyRenderer $this
+ * @var \Woda\MezzioModule\User\App\Login\LoginForm $form
  * @var string $token
  */
-
-use App\View\Renderer\DummyRenderer;
-use Woda\MezzioModule\User\App\Login\LoginForm;
-
 $form->get('csrf')->setValue($token);
 ?>
-<section class="form-signin">
-    <div class="text-center mb-4">
-        <img class="mb-4" src="logo.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-    </div>
+<section class="form-login">
+    <?= $this->partial('user::partial/header', ['title' => 'Login']) ?>
     <?= $this->form($form) ?>
-    <div class="mt-5 mb-3 text-muted text-center">
-        <ul style="list-style-type: none;margin: 0;padding: 0;">
+    <div>
+        <ul>
             <li><a href="<?= $this->url('register') ?>">Register</a></li>
             <li><a href="<?= $this->url('password-reset') ?>">Lost Password?</a></li>
             <li><a href="<?= $this->url('home') ?>">Home</a></li>

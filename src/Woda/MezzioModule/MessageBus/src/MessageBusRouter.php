@@ -8,13 +8,13 @@ use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
-use Woda\MezzioModule\Core\Router\RouteProviderInterface;
+use Woda\MezzioModule\Core\Router\RouteProvider;
 use Woda\MezzioModule\MessageBus\Admin\Log\MessageBusLogHandler;
 use Woda\MezzioModule\MessageBus\Log\MessageLogEntry;
 
 use function array_merge;
 
-final class MessageBusRouter implements RouteProviderInterface
+final class MessageBusRouter implements RouteProvider
 {
     private const MESSAGE_BUS_LOG = 'admin.message-bus-log';
     private const MESSAGE_BUS_LOG_ENTRY = 'admin.message-bus-log.entry';

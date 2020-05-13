@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Woda\User\Command;
 
-use Woda\User\Repository\UserRepository;
+use Woda\User\Repository\UserRepositoryInterface;
 use Woda\User\User;
 
 final class RegisterUserHandler
 {
-    private UserRepository $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }

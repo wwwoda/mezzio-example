@@ -4,7 +4,7 @@ namespace Woda\MessageBus\EventBus;
 
 use Woda\MessageBus\SpyBus;
 
-final class SpyEventBus implements EventBus
+final class SpyEventBus implements EventBusInterface
 {
     private SpyBus $spyBus;
 

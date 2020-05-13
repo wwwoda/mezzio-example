@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Woda\MezzioModule\Core;
 
-use Woda\MezzioModule\Authentication\Middleware\AuthenticationMiddleware;
+use Woda\MezzioModule\Authentication\Middleware\MezzioAuthenticationMiddleware;
 use Woda\MezzioModule\Core\Middleware\CsrfMiddleware;
 use Woda\MezzioModule\Core\Middleware\FlashMessageMiddleware;
+use Woda\MezzioModule\Core\Middleware\MezzioSessionMiddleware;
 use Woda\MezzioModule\Core\Middleware\PrgMiddleware;
-use Woda\MezzioModule\Core\Middleware\SessionMiddleware;
 use Woda\MezzioModule\I18n\Middleware\LanguagePriorityMiddleware;
 use Woda\MezzioModule\User\Middleware\AuthorizationMiddleware;
 
@@ -18,7 +18,7 @@ use Woda\MezzioModule\User\Middleware\AuthorizationMiddleware;
 function adminMiddleware(string $handler): array
 {
     return [
-        AuthenticationMiddleware::class,
+        MezzioAuthenticationMiddleware::class,
         AuthorizationMiddleware::class,
         $handler,
     ];
@@ -40,7 +40,7 @@ function apiMiddleware(string $handler): array
 function backendMiddleware(string $handler): array
 {
     return [
-        AuthenticationMiddleware::class,
+        MezzioAuthenticationMiddleware::class,
         AuthorizationMiddleware::class,
         $handler,
     ];
@@ -53,7 +53,7 @@ function formMiddleware(string $handler): array
 {
     return [
         LanguagePriorityMiddleware::class,
-        SessionMiddleware::class,
+        MezzioSessionMiddleware::class,
         FlashMessageMiddleware::class,
         CsrfMiddleware::class,
         PrgMiddleware::class,
@@ -67,6 +67,7 @@ function formMiddleware(string $handler): array
 function userMiddleware(string $handler): array
 {
     return [
+        MezzioSessionMiddleware::class,
         $handler,
     ];
 }

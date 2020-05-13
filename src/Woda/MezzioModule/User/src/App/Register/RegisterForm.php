@@ -9,7 +9,7 @@ use Laminas\Form\Element\Hidden;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Mezzio\Csrf\CsrfGuardInterface;
-use Woda\Core\Crypt\Password\Password;
+use Woda\Core\Crypt\Password\PasswordInterface;
 use Woda\Core\ValueObject\Email;
 use Woda\Core\ValueObject\PasswordHash;
 
@@ -17,7 +17,7 @@ final class RegisterForm extends Form implements InputFilterProviderInterface
 {
     /** @var CsrfGuardInterface */
     private $guard;
-    /** @var Password */
+    /** @var PasswordInterface */
     private $password;
 
     /**

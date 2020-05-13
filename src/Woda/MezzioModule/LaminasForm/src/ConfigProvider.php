@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Woda\MezzioModule\LaminasForm;
 
-use Woda\Form\FormElementManager;
-
 final class ConfigProvider
 {
     public function __invoke(): array
@@ -16,7 +14,7 @@ final class ConfigProvider
             ],
             'dependencies' => [
                 'aliases' => [
-                    FormElementManager::class => LaminasFormElementManager::class,
+                    FormElementManagerInterface::class => LaminasFormElementManager::class,
                 ],
                 'factories' => [
                     PolyfillFormElementManager::class => PolyfillFormElementManagerFactory::class,

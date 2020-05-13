@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Woda\User\Repository;
 
+use Closure;
 use Woda\Core\ValueObject\Email;
 use Woda\User\User;
 
-final class MemoryUserRepository implements UserRepository
+use function array_filter;
+use function array_map;
+use function array_values;
+
+final class MemoryUserRepository implements UserRepositoryInterface
 {
     /**
      * @var array<string, string>
@@ -37,7 +42,7 @@ final class MemoryUserRepository implements UserRepository
         );
     }
 
-    private function findOneUser(\Closure $callback): ?User
+    private function findOneUser(Closure $callback): ?User
     {
         $found = $this->findUsers($callback);
         if ($found < 1) {
@@ -49,14 +54,14 @@ final class MemoryUserRepository implements UserRepository
     /**
      * @return User[]
      */
-    private function findUsers(\Closure $callback): array
+    private function findUsers(Closure $callback): array
     {
-        return \array_values(\array_filter($this->unserializeUsers(), $callback));
+        return array_values(array_filter($this->unserializeUsers(), $callback));
     }
 
     private function unserializeUsers()
     {
-        return \array_map(
+        return array_map(
             function (string $serialized): User {
                 return unserialize($serialized);
             },

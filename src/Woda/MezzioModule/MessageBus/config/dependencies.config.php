@@ -12,9 +12,9 @@ use SimpleBus\Message\Recorder\RecordsMessages as SimpleBusRecordsMessages;
 use SimpleBus\Message\Subscriber\NotifiesMessageSubscribersMiddleware;
 use Woda\MessageBus\CommandBus\CommandBus;
 use Woda\MessageBus\CommandBus\SimpleBusCommandBus;
-use Woda\MessageBus\EventBus\EventBus;
+use Woda\MessageBus\EventBus\EventBusInterface;
 use Woda\MessageBus\EventBus\SimpleBusEventBus;
-use Woda\MessageBus\Message\Recorder\MessageRecorder;
+use Woda\MessageBus\Message\Recorder\MessageRecorderInterface;
 use Woda\MessageBus\Message\Recorder\SimpleBusMessageRecorder;
 use Woda\MessageQueue\MemoryQueue;
 use Woda\MessageQueue\Queue;
@@ -40,10 +40,10 @@ return [
     'dependencies' => [
         'aliases' => [
             CommandBus::class => SimpleBusCommandBus::class,
-            EventBus::class => SimpleBusEventBus::class,
+            EventBusInterface::class => SimpleBusEventBus::class,
             MessageBuilder::class => SerializedMessageBuilder::class,
             Queue::class => MemoryQueue::class,
-            MessageRecorder::class => SimpleBusMessageRecorder::class,
+            MessageRecorderInterface::class => SimpleBusMessageRecorder::class,
             ShouldBeQueued::class => ClassNames::class,
             SimpleBusRecordsMessages::class => PublicMessageRecorder::class,
         ],

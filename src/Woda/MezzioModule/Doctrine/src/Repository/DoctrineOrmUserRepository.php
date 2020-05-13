@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace Woda\MezzioModule\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Woda\Core\ValueObject\Email;
 use Woda\MezzioModule\User\Exception\UserNotFoundException;
-use Woda\User\Repository\UserRepository;
+use Woda\User\Repository\UserRepositoryInterface;
 use Woda\User\User;
 
-final class DoctrineOrmUserRepository implements UserRepository
+final class DoctrineOrmUserRepository implements UserRepositoryInterface
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
-    /** @var EntityRepository */
-    private $repository;
+    private EntityManagerInterface $entityManager;
+    private ObjectRepository $repository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -36,7 +34,7 @@ final class DoctrineOrmUserRepository implements UserRepository
     public function save(User $user): void
     {
         $this->entityManager->persist($user);
-        $this->entityManager->flush($user);
+        $this->entityManager->flush();
     }
 
     public function findByEmail(Email $email): ?User

@@ -8,7 +8,7 @@ use Mezzio\Authentication\UserInterface;
 use Woda\MezzioModule\Config\MezzioModuleConfig;
 use Woda\MezzioModule\Doctrine\Repository\DoctrineOrmUserRepository;
 use Woda\User\Command\UserCommandMappingProvider;
-use Woda\User\Repository\UserRepository;
+use Woda\User\Repository\UserRepositoryInterface;
 
 final class ConfigProvider
 {
@@ -22,7 +22,7 @@ final class ConfigProvider
                 [
                     'dependencies' => [
                         'aliases' => [
-                            UserRepository::class => DoctrineOrmUserRepository::class,
+                            UserRepositoryInterface::class => DoctrineOrmUserRepository::class,
                         ],
                         'factories' => [
                             UserInterface::class => UserFactory::class,

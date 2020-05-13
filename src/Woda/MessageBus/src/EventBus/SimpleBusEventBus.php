@@ -4,7 +4,7 @@ namespace Woda\MessageBus\EventBus;
 
 use SimpleBus\Message\Bus\MessageBus;
 
-final class SimpleBusEventBus implements EventBus
+final class SimpleBusEventBus implements EventBusInterface
 {
     private MessageBus $messageBus;
 

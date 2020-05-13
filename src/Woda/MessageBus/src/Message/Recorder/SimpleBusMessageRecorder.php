@@ -4,7 +4,7 @@ namespace Woda\MessageBus\Message\Recorder;
 
 use SimpleBus\Message\Recorder\RecordsMessages as SimpleBusRecordsMessages;
 
-class SimpleBusMessageRecorder implements MessageRecorder
+class SimpleBusMessageRecorder implements MessageRecorderInterface
 {
     private SimpleBusRecordsMessages $messageRecorder;
 

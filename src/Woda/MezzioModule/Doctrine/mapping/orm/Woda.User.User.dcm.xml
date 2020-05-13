@@ -8,7 +8,5 @@
         </id>
         <field name="email" type="email_object_type"/>
         <field name="passwordHash" column="password_hash" type="password_hash_object_type"/>
-        <field name="roles" type="json"/>
-        <field name="details" type="json"/>
     </entity>
 </doctrine-mapping>

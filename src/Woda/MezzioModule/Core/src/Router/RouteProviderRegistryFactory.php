@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Woda\MezzioModule\Core\Router;
 
 use Psr\Container\ContainerInterface;
-use Woda\MezzioModule\Config\Config;
+use Woda\MezzioModule\Config\AppConfig;
 
 use function array_map;
 
@@ -15,16 +15,11 @@ final class RouteProviderRegistryFactory
     {
         return new RouteProviderRegistry(
             ...array_map(
-                   function (string $serviceName) use ($container): RouteProviderInterface {
+                   function (string $serviceName) use ($container): RouteProvider {
                        return $container->get($serviceName);
                    },
-                   $this->config($container)->array('woda/route_provider')
+                   AppConfig::fromContainer($container)->array('woda/router/route_provider')
                )
         );
-    }
-
-    private function config(ContainerInterface $container): Config
-    {
-        return $container->get(Config::class);
     }
 }

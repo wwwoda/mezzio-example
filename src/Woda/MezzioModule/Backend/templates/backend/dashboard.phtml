@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @var $user \Woda\MezzioModule\User\MezzioUser
+ */
 $this->headLink()->prependStylesheet('/css/backend/backend.css');
 ?>
-Backend Dashboard
+Backend Dashboard<br>
+User: <?= $user === null ? 'no user' : $user->getIdentity() ?>

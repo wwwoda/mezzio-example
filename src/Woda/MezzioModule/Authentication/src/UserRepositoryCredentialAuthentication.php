@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Woda\MezzioModule\Authentication;
 
-use Woda\Core\Crypt\Password\Password;
+use Woda\Core\Crypt\Password\PasswordInterface;
 use Woda\Core\ValueObject\Email;
-use Woda\User\Repository\UserRepository;
+use Woda\User\Repository\UserRepositoryInterface;
 use Woda\User\User;
 
 final class UserRepositoryCredentialAuthentication implements CredentialAuthenticationInterface
 {
-    /** @var UserRepository */
-    private $repository;
-    /** @var Password */
-    private $password;
+    private UserRepositoryInterface $repository;
+    private PasswordInterface $password;
 
-    public function __construct(UserRepository $repository, Password $password)
+    public function __construct(UserRepositoryInterface $repository, PasswordInterface $password)
     {
         $this->repository = $repository;
         $this->password = $password;

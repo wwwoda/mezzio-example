@@ -9,14 +9,12 @@ use Mezzio\MiddlewareFactory;
 use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
 use Woda\MezzioModule\Admin\Handler\Dashboard\DashboardHandler;
-use Woda\MezzioModule\Core\Router\RouteProviderInterface;
+use Woda\MezzioModule\Core\Router\PipeProvider;
+use Woda\MezzioModule\Core\Router\RouteProvider;
 
-use function Woda\MezzioModule\Core\adminMiddleware;
-
-final class AdminRouter implements RouteProviderInterface
+final class AdminRouter implements RouteProvider, PipeProvider
 {
     private const DASHBOARD = 'admin.dashboard';
-    private const ROOT_ROUTE = '/admin';
     private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
@@ -26,13 +24,17 @@ final class AdminRouter implements RouteProviderInterface
 
     public function addRoutes(Application $app, MiddlewareFactory $factory, ContainerInterface $container): void
     {
-        $app->get(self::ROOT_ROUTE, adminMiddleware(DashboardHandler::class), self::DASHBOARD);
+        $app->get('/admin', DashboardHandler::class, self::DASHBOARD);
+    }
+
+    public function addPipe(Application $app, MiddlewareFactory $factory, ContainerInterface $container): void
+    {
+        // TODO: Add Middleware for admin route
     }
 
     /**
      * @param array<string, mixed> $substitutions
      * @param array<string, mixed> $options
-     * @return string
      */
     public function dashboardUrl(array $substitutions = [], array $options = []): string
     {
