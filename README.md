@@ -36,7 +36,7 @@ $ composer development-status
 ### Doctrine cli
 
 ```bash
-$ composer doctrine
+$ vendor/bin/doctrine
 ```
 
 ## Configuration caching
