@@ -34,7 +34,6 @@
         "mezzio/mezzio-authentication-basic": "^1.0",
         "mezzio/mezzio-authentication-session": "^1.0",
         "mezzio/mezzio-authorization": "^1.0",
-        "mezzio/mezzio-authorization-acl": "^1.0",
         "mezzio/mezzio-csrf": "^1.0",
         "mezzio/mezzio-flash": "^1.0",
         "mezzio/mezzio-helpers": "^5.0",

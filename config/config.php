@@ -24,7 +24,6 @@ $providers = [
     \Mezzio\Authentication\Basic\ConfigProvider::class,
     \Mezzio\Authentication\Session\ConfigProvider::class,
     \Mezzio\Authorization\ConfigProvider::class,
-    \Mezzio\Authorization\Acl\ConfigProvider::class,
     \Mezzio\Csrf\ConfigProvider::class,
     \Mezzio\Flash\ConfigProvider::class,
     \Mezzio\Helper\ConfigProvider::class,
